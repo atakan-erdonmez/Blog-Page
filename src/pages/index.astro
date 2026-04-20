@@ -1,0 +1,228 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import githubLogo from '../assets/github_logo.png';
+import knowledgeBaseLogo from '../assets/knowledge_base.webp';
+import linkedinLogo from '../assets/linkedin logo.png';
+import blogLogo from '../assets/blog_logo.webp';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main class="landing">
+      <section class="hero">
+        <div class="hero-text">
+          <p class="eyebrow">Infrastructure • Cloud • Automation</p>
+          <h1>Atakan Erdonmez</h1>
+          <p>
+            I build and document infrastructure, automation workflows, and self-hosted systems.
+            This site is the central entry point for my blog, knowledge base, portfolio, and other projects.
+          </p>
+          <p>
+            My focus is on practical engineering: clear architecture, reproducible deployments,
+            and systems that are actually maintainable.
+          </p>
+        </div>
+
+        <div class="hero-photo">
+          <div class="photo-placeholder">Photo</div>
+        </div>
+      </section>
+
+      <section class="links-section">
+        <div class="text-logo-links">
+          <a class="text-logo-link" href="/blog">
+            <span class="text-logo-label">Blog</span>
+            <img class="brand-logo" src={blogLogo.src} alt="Blog" />
+          </a>
+          <a class="text-logo-link" href="#">
+            <span class="text-logo-label">Knowledge Base</span>
+            <img class="brand-logo" src={knowledgeBaseLogo.src} alt="Knowledge Base" />
+          </a>
+        </div>
+
+        <div class="logo-only-links">
+          <a
+            class="logo-only-link"
+            href="https://github.com/atakan-erdonmez"
+            target="_blank"
+            rel="noopener"
+            aria-label="GitHub"
+          >
+            <img class="brand-logo" src={githubLogo.src} alt="GitHub" />
+          </a>
+          <a
+            class="logo-only-link"
+            href="https://linkedin.com/in/atakanerdonmez"
+            target="_blank"
+            rel="noopener"
+            aria-label="LinkedIn"
+          >
+            <img class="brand-logo" src={linkedinLogo.src} alt="LinkedIn" />
+          </a>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  :root {
+    --landing-bg: #0f1115;
+    --card-bg: #ffffff;
+    --card-border: #d7dde8;
+    --text-main: #f3f4f6;
+    --text-soft: #b8bec9;
+  }
+
+  body {
+    background: var(--landing-bg);
+    color: var(--text-main);
+  }
+
+  .landing {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: 1.3fr 0.9fr;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+
+  .eyebrow {
+    margin: 0 0 0.75rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-soft);
+  }
+
+  .hero h1 {
+    margin: 0 0 1rem;
+    font-size: clamp(2.3rem, 5vw, 4.5rem);
+    line-height: 1.05;
+    color: var(--text-main);
+  }
+
+  .hero p {
+    max-width: 62ch;
+    margin: 0 0 1rem;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--text-soft);
+  }
+
+  .hero-photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .photo-placeholder {
+    width: min(100%, 360px);
+    aspect-ratio: 1 / 1;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #232836, #151922);
+    border: 1px solid var(--card-border);
+    display: grid;
+    place-items: center;
+    color: var(--text-soft);
+    font-size: 1rem;
+  }
+
+  .links-section {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1.5rem 2rem;
+    align-items: center;
+  }
+
+  .text-logo-links {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .text-logo-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding: 0.7rem 0;
+    background: #fff;
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 0.8rem 1rem;
+  }
+
+  .text-logo-label {
+    color: rgb(var(--black));
+    font-size: 1.15rem;
+    font-weight: 600;
+    min-width: 170px;
+  }
+
+  .brand-logo {
+    display: block;
+    width: 170px;
+    height: 74px;
+    object-fit: contain;
+  }
+
+  .logo-only-links {
+    display: grid;
+    gap: 1rem;
+    justify-items: end;
+  }
+
+  .logo-only-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 0.8rem;
+    border-radius: 14px;
+    border: 1px solid var(--card-border);
+    background: #fff;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+
+  .logo-only-link:hover,
+  .text-logo-link:hover {
+    transform: translateY(-2px);
+    border-color: #b8c3d8;
+  }
+
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+    }
+
+    .links-section {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+
+    .logo-only-links {
+      grid-template-columns: repeat(2, minmax(0, max-content));
+      justify-items: start;
+      justify-content: start;
+    }
+
+    .text-logo-label {
+      min-width: 150px;
+    }
+  }
+</style>

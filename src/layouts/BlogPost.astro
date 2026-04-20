@@ -1,0 +1,263 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, description, pubDate, updatedDate } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+		<style>
+			main {
+				width: calc(100% - 2em);
+				max-width: 100%;
+				margin: 0;
+			}
+			.post-layout {
+				width: min(1380px, calc(100% - 2em));
+				margin: 0 auto;
+				display: grid;
+				grid-template-columns: minmax(0, 1fr) 240px;
+				gap: 3rem;
+				align-items: start;
+			}
+			.prose {
+				width: 100%;
+				max-width: 100%;
+				min-width: 0;
+				margin: 0;
+				padding: 1em;
+				color: rgb(var(--gray-dark));
+			}
+			.toc {
+				position: sticky;
+				top: 1rem;
+				height: calc(100vh - 1rem);
+				max-height: calc(100vh - 1rem);
+				overflow: auto;
+				padding: 0.75rem 0.3rem 0.75rem 0.9rem;
+				justify-self: end;
+				width: 240px;
+				box-sizing: border-box;
+			}
+			.toc-title {
+				margin: 0 0 0.8rem;
+				font-size: 0.9rem;
+				font-weight: 700;
+				color: rgb(var(--gray-dark));
+			}
+			.toc-list {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				display: grid;
+				gap: 0.25rem;
+			}
+			.toc-list a,
+			.toc-list a:visited {
+				display: block;
+				text-decoration: none;
+				color: rgb(var(--gray));
+				font-size: 0.92rem;
+				line-height: 1.4;
+				padding: 0.2rem 0;
+				transition: color 0.15s ease;
+			}
+			.toc-list li {
+				margin: 0;
+			}
+			.toc-sublist {
+				list-style: none;
+				margin: 0.35rem 0 0.15rem;
+				padding-left: 0.9rem;
+				display: grid;
+				gap: 0.3rem;
+			}
+			.toc-list li.toc-h3 a,
+			.toc-list li.toc-h3 a:visited {
+				font-size: 0.85rem;
+				color: rgb(var(--gray));
+			}
+			.toc-list a.active,
+			.toc-list a.active:visited {
+				color: rgb(var(--black));
+				font-weight: 600;
+			}
+			.toc-list a:hover {
+				color: rgb(var(--gray-dark));
+			}
+			.toc-empty {
+				margin: 0;
+				font-size: 0.88rem;
+				color: rgb(var(--gray));
+			}
+			.title {
+				margin-bottom: 1em;
+				padding: 1em 0;
+				text-align: left;
+				line-height: 1;
+			}
+			.title h1 {
+				margin: 0 0 0.5em 0;
+			}
+			.date {
+				margin-bottom: 0.5em;
+				color: rgb(var(--gray));
+			}
+			.last-updated-on {
+				font-style: italic;
+			}
+			@media (max-width: 1000px) {
+				.post-layout {
+					grid-template-columns: 1fr;
+				}
+				.toc {
+					position: static;
+					order: -1;
+					height: auto;
+					max-height: none;
+					padding: 0;
+					width: 100%;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<Header />
+		<main>
+			<div class="post-layout">
+				<article class="prose">
+					<div class="title">
+						<h1>{title}</h1>
+						<div class="date">
+							<FormattedDate date={pubDate} />
+							{
+								updatedDate && (
+									<div class="last-updated-on">
+										Last updated on <FormattedDate date={updatedDate} />
+									</div>
+								)
+							}
+						</div>
+						<hr />
+					</div>
+					<slot />
+				</article>
+				<aside class="toc" aria-label="Table of contents">
+					<h2 class="toc-title">Table of Contents</h2>
+					<ul id="toc-list" class="toc-list"></ul>
+					<p id="toc-empty" class="toc-empty">No sections yet.</p>
+				</aside>
+			</div>
+		</main>
+		<Footer />
+		<script is:inline>
+			const slugify = (text) =>
+				text
+					.toLowerCase()
+					.trim()
+					.replace(/[^\w\s-]/g, '')
+					.replace(/\s+/g, '-');
+
+			const prose = document.querySelector('.prose');
+			const tocList = document.getElementById('toc-list');
+			const emptyState = document.getElementById('toc-empty');
+			const tocLinks = [];
+
+			if (prose && tocList && emptyState) {
+				const headings = [...prose.querySelectorAll('h2, h3')];
+				let currentH2Item = null;
+
+				headings.forEach((heading) => {
+					if (!heading.id) {
+						heading.id = slugify(heading.textContent || '');
+					}
+
+					const item = document.createElement('li');
+					const tagName = heading.tagName.toLowerCase();
+					item.className = `toc-${tagName}`;
+
+					const link = document.createElement('a');
+					link.href = `#${heading.id}`;
+					link.textContent = heading.textContent || '';
+					link.dataset.targetId = heading.id;
+					tocLinks.push(link);
+
+					item.appendChild(link);
+
+					if (tagName === 'h2') {
+						tocList.appendChild(item);
+						currentH2Item = item;
+						return;
+					}
+
+					if (tagName === 'h3' && currentH2Item) {
+						let sublist = currentH2Item.querySelector('.toc-sublist');
+						if (!sublist) {
+							sublist = document.createElement('ul');
+							sublist.className = 'toc-sublist';
+							currentH2Item.appendChild(sublist);
+						}
+						sublist.appendChild(item);
+						return;
+					}
+
+					tocList.appendChild(item);
+				});
+
+				const hasItems = tocList.children.length > 0;
+				emptyState.hidden = hasItems;
+				tocList.hidden = !hasItems;
+
+				const setActiveLink = (id) => {
+					tocLinks.forEach((tocLink) => {
+						tocLink.classList.toggle('active', tocLink.dataset.targetId === id);
+					});
+				};
+
+				const headingById = new Map(
+					headings.map((heading) => [heading.id, heading])
+				);
+
+				const observer = new IntersectionObserver(
+					(entries) => {
+						const visible = entries
+							.filter((entry) => entry.isIntersecting)
+							.sort(
+								(a, b) =>
+									a.target.getBoundingClientRect().top -
+									b.target.getBoundingClientRect().top
+							);
+
+						if (visible.length > 0) {
+							setActiveLink(visible[0].target.id);
+							return;
+						}
+
+						const passed = headings
+							.filter((heading) => heading.getBoundingClientRect().top < 140)
+							.at(-1);
+						if (passed) setActiveLink(passed.id);
+					},
+					{ rootMargin: '-18% 0px -72% 0px', threshold: [0, 1] }
+				);
+
+				headings.forEach((heading) => observer.observe(heading));
+
+				const hashId = window.location.hash.replace('#', '');
+				if (hashId && headingById.has(hashId)) {
+					setActiveLink(hashId);
+				} else if (headings.length > 0) {
+					setActiveLink(headings[0].id);
+				}
+			}
+		</script>
+	</body>
+</html>
