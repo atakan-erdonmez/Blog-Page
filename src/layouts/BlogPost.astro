@@ -62,8 +62,8 @@ const { title, description, pubDate, updatedDate } = Astro.props;
 			.toc-list a,
 			.toc-list a:visited {
 				display: block;
-				text-decoration: none;
-				color: rgb(var(--gray));
+				text-decoration: none !important;
+				color: rgb(var(--gray-dark)) !important;
 				font-size: 0.92rem;
 				line-height: 1.4;
 				padding: 0.2rem 0;
@@ -82,12 +82,12 @@ const { title, description, pubDate, updatedDate } = Astro.props;
 			.toc-list li.toc-h3 a,
 			.toc-list li.toc-h3 a:visited {
 				font-size: 0.85rem;
-				color: rgb(var(--gray));
+				color: rgb(var(--gray-dark)) !important;
 			}
 			.toc-list a.active,
 			.toc-list a.active:visited {
-				color: rgb(var(--black));
-				font-weight: 600;
+				color: #ff9d00 !important;
+				font-weight: 600 !important;
 			}
 			.toc-list a:hover {
 				color: rgb(var(--gray-dark));

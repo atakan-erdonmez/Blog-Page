@@ -4,9 +4,9 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import githubLogo from '../assets/github_logo.png';
-import knowledgeBaseLogo from '../assets/knowledge_base.webp';
 import linkedinLogo from '../assets/linkedin logo.png';
-import blogLogo from '../assets/blog_logo.webp';
+import blogLogo from '../assets/blog logo.png';
+import kbLogo from '../assets/kb logo.png';
 ---
 
 <!doctype html>
@@ -37,33 +37,30 @@ import blogLogo from '../assets/blog_logo.webp';
       </section>
 
       <section class="links-section">
-        <div class="text-logo-links">
-          <a class="text-logo-link" href="/blog">
-            <span class="text-logo-label">Blog</span>
+        <div class="uniform-links">
+          <a class="uniform-link social-hover" href="/blog" data-hover-text="Coming soon...">
             <img class="brand-logo" src={blogLogo.src} alt="Blog" />
           </a>
-          <a class="text-logo-link" href="#">
-            <span class="text-logo-label">Knowledge Base</span>
-            <img class="brand-logo" src={knowledgeBaseLogo.src} alt="Knowledge Base" />
+          <a class="uniform-link social-hover" href="#" data-hover-text="Coming soon...">
+            <img class="brand-logo" src={kbLogo.src} alt="Knowledge Base" />
           </a>
-        </div>
-
-        <div class="logo-only-links">
           <a
-            class="logo-only-link"
+            class="uniform-link social-hover"
             href="https://github.com/atakan-erdonmez"
             target="_blank"
             rel="noopener"
             aria-label="GitHub"
+            data-hover-text="my projects & repos"
           >
             <img class="brand-logo" src={githubLogo.src} alt="GitHub" />
           </a>
           <a
-            class="logo-only-link"
+            class="uniform-link social-hover"
             href="https://linkedin.com/in/atakanerdonmez"
             target="_blank"
             rel="noopener"
             aria-label="LinkedIn"
+            data-hover-text="Take a look at my linkedin profile"
           >
             <img class="brand-logo" src={linkedinLogo.src} alt="LinkedIn" />
           </a>
@@ -89,7 +86,7 @@ import blogLogo from '../assets/blog_logo.webp';
   }
 
   .landing {
-    max-width: 1400px;
+    max-width: 1500px;
     margin: 0 auto;
     padding: 3rem 1.5rem 4rem;
   }
@@ -144,35 +141,59 @@ import blogLogo from '../assets/blog_logo.webp';
   }
 
   .links-section {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 1.5rem 2rem;
-    align-items: center;
+    margin-top: 0.5rem;
   }
 
-  .text-logo-links {
+  .uniform-links {
     display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
+    max-width: 640px;
   }
 
-  .text-logo-link {
+  .uniform-link {
     text-decoration: none;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 1rem;
-    padding: 0.7rem 0;
+    justify-content: center;
     background: #fff;
     border: 1px solid var(--card-border);
     border-radius: 14px;
     padding: 0.8rem 1rem;
+    transition: transform 0.15s ease, border-color 0.15s ease;
   }
 
-  .text-logo-label {
-    color: rgb(var(--black));
-    font-size: 1.15rem;
+  .social-hover {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .social-hover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 1;
+  }
+
+  .social-hover::after {
+    content: attr(data-hover-text);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 1.5rem);
+    text-align: center;
+    color: #fff;
+    font-size: 0.9rem;
+    line-height: 1.35;
     font-weight: 600;
-    min-width: 170px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 2;
+    pointer-events: none;
   }
 
   .brand-logo {
@@ -182,27 +203,14 @@ import blogLogo from '../assets/blog_logo.webp';
     object-fit: contain;
   }
 
-  .logo-only-links {
-    display: grid;
-    gap: 1rem;
-    justify-items: end;
-  }
-
-  .logo-only-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.6rem 0.8rem;
-    border-radius: 14px;
-    border: 1px solid var(--card-border);
-    background: #fff;
-    transition: transform 0.15s ease, border-color 0.15s ease;
-  }
-
-  .logo-only-link:hover,
-  .text-logo-link:hover {
+  .uniform-link:hover {
     transform: translateY(-2px);
     border-color: #b8c3d8;
+  }
+
+  .social-hover:hover::before,
+  .social-hover:hover::after {
+    opacity: 1;
   }
 
   @media (max-width: 900px) {
@@ -211,18 +219,11 @@ import blogLogo from '../assets/blog_logo.webp';
     }
 
     .links-section {
-      grid-template-columns: 1fr;
-      gap: 1.25rem;
+      margin-top: 0;
     }
 
-    .logo-only-links {
-      grid-template-columns: repeat(2, minmax(0, max-content));
-      justify-items: start;
-      justify-content: start;
-    }
-
-    .text-logo-label {
-      min-width: 150px;
+    .uniform-links {
+      max-width: 100%;
     }
   }
 </style>
