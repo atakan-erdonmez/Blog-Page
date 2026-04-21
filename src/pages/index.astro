@@ -7,6 +7,8 @@ import githubLogo from '../assets/github_logo.png';
 import linkedinLogo from '../assets/linkedin logo.png';
 import blogLogo from '../assets/blog logo.png';
 import kbLogo from '../assets/kb logo.png';
+import projectPortfolio from '../assets/project_portfolio.png';
+import internalWiki from '../assets/internal_wiki.png';
 ---
 
 <!doctype html>
@@ -38,11 +40,15 @@ import kbLogo from '../assets/kb logo.png';
 
       <section class="links-section">
         <div class="uniform-links">
-          <a class="uniform-link social-hover" href="/blog" data-hover-text="Coming soon...">
-            <img class="brand-logo" src={blogLogo.src} alt="Blog" />
-          </a>
-          <a class="uniform-link social-hover" href="#" data-hover-text="Coming soon...">
-            <img class="brand-logo" src={kbLogo.src} alt="Knowledge Base" />
+          <a
+            class="uniform-link social-hover"
+            href="https://linkedin.com/in/atakanerdonmez"
+            target="_blank"
+            rel="noopener"
+            aria-label="LinkedIn"
+            data-hover-text="Take a look at my linkedin profile"
+          >
+            <img class="brand-logo" src={linkedinLogo.src} alt="LinkedIn" />
           </a>
           <a
             class="uniform-link social-hover"
@@ -54,15 +60,17 @@ import kbLogo from '../assets/kb logo.png';
           >
             <img class="brand-logo" src={githubLogo.src} alt="GitHub" />
           </a>
-          <a
-            class="uniform-link social-hover"
-            href="https://linkedin.com/in/atakanerdonmez"
-            target="_blank"
-            rel="noopener"
-            aria-label="LinkedIn"
-            data-hover-text="Take a look at my linkedin profile"
-          >
-            <img class="brand-logo" src={linkedinLogo.src} alt="LinkedIn" />
+          <a class="uniform-link social-hover" href="/blog" data-hover-text="Coming soon...">
+            <img class="brand-logo" src={blogLogo.src} alt="Blog" />
+          </a>
+          <a class="uniform-link social-hover" href="#" data-hover-text="Coming soon...">
+            <img class="brand-logo" src={kbLogo.src} alt="Knowledge Base" />
+          </a>
+          <a class="uniform-link social-hover" href="#" data-hover-text="Coming soon...">
+            <img class="brand-logo" src={projectPortfolio.src} alt="Project Portfolio" />
+          </a>
+          <a class="uniform-link social-hover" href="#" data-hover-text="Coming soon...">
+            <img class="brand-logo" src={internalWiki.src} alt="Internal Wiki" />
           </a>
         </div>
       </section>
@@ -146,9 +154,9 @@ import kbLogo from '../assets/kb logo.png';
 
   .uniform-links {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columns, 3 rows */
     gap: 1rem;
-    max-width: 640px;
+    max-width: 640px; /* Adjusted for 2 columns */
   }
 
   .uniform-link {
@@ -223,7 +231,22 @@ import kbLogo from '../assets/kb logo.png';
     }
 
     .uniform-links {
+      grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columns on smaller screens */
       max-width: 100%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    /* Adjust for medium screens to maintain 2 columns */
+    .uniform-links {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 480px) {
+    /* Adjust for extra small screens to 1 column */
+    .uniform-links {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
     }
   }
 </style>

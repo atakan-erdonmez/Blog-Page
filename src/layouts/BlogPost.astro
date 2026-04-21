@@ -7,25 +7,64 @@ import Header from '../components/Header.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
 		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
+			.hero-image-container {
+				width: min(1380px, calc(100% - 2em));
+				margin: 0 auto;
+				height: 40vh;
+				position: sticky;
+				top: 0;
+				overflow: hidden;
+				z-index: 0;
+				border-radius: 12px;
+			}
+			.hero-image {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				filter: brightness(0.7);
+				display: block;
+			}
+			.content-wrapper {
+				position: relative;
+				z-index: 10;
+				background-color: var(--bg-color);
+				margin-top: -5vh;
+				padding-top: 0;
+			}
+			.reveal-spacer {
+				height: 10vh;
+				background: linear-gradient(
+					to bottom,
+					transparent 0%,
+					var(--bg-color) 100%
+				);
+				pointer-events: none;
 			}
 			.post-layout {
+				--bg-color: #ffffff;
+				background-color: var(--bg-color);
+				padding-top: 2rem;
 				width: min(1380px, calc(100% - 2em));
 				margin: 0 auto;
 				display: grid;
 				grid-template-columns: minmax(0, 1fr) 240px;
 				gap: 3rem;
 				align-items: start;
+			}
+
+			/* Adjust existing main/prose styles to fit new structure */
+			main {
+				width: 100%;
+				max-width: none;
+				margin: 0;
+				padding: 0;
 			}
 			.prose {
 				width: 100%;
@@ -35,6 +74,13 @@ const { title, description, pubDate, updatedDate } = Astro.props;
 				padding: 1em;
 				color: rgb(var(--gray-dark));
 			}
+			/* Ensure header is on top */
+			header {
+				position: sticky;
+				top: 0;
+				z-index: 100;
+			}
+
 			.toc {
 				position: sticky;
 				top: 1rem;
@@ -113,7 +159,20 @@ const { title, description, pubDate, updatedDate } = Astro.props;
 			.last-updated-on {
 				font-style: italic;
 			}
+
+			/* Adjustments for mobile */
 			@media (max-width: 1000px) {
+				.hero-image-container {
+					width: calc(100% - 2em);
+					height: 30vh;
+				}
+				.reveal-spacer {
+					height: 10vh;
+				}
+				.content-wrapper {
+					margin-top: 0;
+					padding-top: 0;
+				}
 				.post-layout {
 					grid-template-columns: 1fr;
 				}
@@ -131,7 +190,17 @@ const { title, description, pubDate, updatedDate } = Astro.props;
 
 	<body>
 		<Header />
-		<main>
+		{heroImage && (
+			<div class="hero-image-container">
+				<img 
+					src={typeof heroImage === 'string' ? heroImage : heroImage.src} 
+					alt={title} 
+					class="hero-image" 
+				/>
+			</div>
+		)}
+		<main class="content-wrapper">
+			<div class="reveal-spacer"></div>
 			<div class="post-layout">
 				<article class="prose">
 					<div class="title">
