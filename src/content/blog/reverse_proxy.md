@@ -1,8 +1,8 @@
 ---
-title: "My post"
-description: "deneme, a short summary"
+title: "Designing a Reverse Proxy Gateway"
+description: "My experience while designing an ingress gateway to my internal infrastructure"
 pubDate: "2026-04-20"
-heroImage: '../../assets/blog-placeholder-2.jpg'
+heroImage: '../../assets/gateway_proxy_image_2.png'
 ---
 
 In a typical infrastructure, internal services are exposed using either a VPN, or port forwarding combined with a reverse proxy.
@@ -17,7 +17,7 @@ graph LR
 %% External Entity
 User((👤 User)) -- "HTTPS" --> CF
 
-subgraph CF_EDGE ["<span style='font-size: 20px;'>☁️ Cloudflare Edge&nbsp;</span>"]
+subgraph CF_EDGE ["<span style='font-size: 48px;'>☁️ Cloudflare Edge&nbsp;&nbsp;&nbsp;</span>"]
     direction TB
     CF{🛡️ WAF / DNS} --> Auth["🔒 Access MFA&nbsp;"]
     Auth --> Tunnel_Edge["🛣️ Tunnel Endpoint&nbsp;"]
@@ -26,12 +26,12 @@ end
 %% --- Path 1: Management ---
 Tunnel_Edge -.-> |"Management Tunnel"| CT_MGMT["🚀 cloudflared&nbsp;"]
 
-subgraph RPI ["<span style='font-size: 20px;'>🧠 Raspberry Pi&nbsp;</span>"]
+subgraph RPI ["<span style='font-size: 32px;'>🧠 Raspberry Pi&nbsp;&nbsp;</span>"]
     direction TB
     CT_MGMT --> Nginx_MGMT["🌐 Nginx Proxy&nbsp;"]
 end
 
-subgraph LAN_MGMT ["<span style='font-size: 20px;'>🖥️ Management Network&nbsp;</span>"]
+subgraph LAN_MGMT ["<span style='font-size: 26px;'>🖥️ Management Network&nbsp;&nbsp;</span>"]
     direction TB
     Nginx_MGMT ==> |pve1-lab| PVE["🖥️ Proxmox&nbsp;"]
     Nginx_MGMT ==> |nas-lab| NAS["💾 NAS&nbsp;"]
@@ -40,18 +40,18 @@ end
 %% --- Path 2: Service ---
 Tunnel_Edge -.-> |"Service Tunnel"| CT_SVC["🚀 cloudflared&nbsp;"]
 
-subgraph LXC ["<span style='font-size: 20px;'>📦 LXC Container&nbsp;</span>"]
+subgraph LXC ["<span style='font-size: 32px;'>📦 LXC Container&nbsp;&nbsp;</span>"]
     direction TB
     CT_SVC --> Nginx_SVC["🌐 Nginx Proxy&nbsp;"]
 end
 
-subgraph LAN_SVC ["<span style='font-size: 20px;'>🖥️ Service Network&nbsp;</span>"]
+subgraph LAN_SVC ["<span style='font-size: 26px;'>🖥️ Service Network&nbsp;&nbsp;</span>"]
     direction TB
     Nginx_SVC ==> |website| WEB["🖥️ Web Server&nbsp;"]
     Nginx_SVC ==> |media| MEDIA["🎞️ Media Server&nbsp;"]
 end
 
-%% Styling (remains the same)
+%% Styling
 style CF_EDGE fill:#fdf6e3,stroke:#eee8d5,color:#586e75,stroke-width:2px
 style RPI fill:#e1f5fe,stroke:#01579b,color:#01579b,stroke-width:2px
 style LXC fill:#e1f5fe,stroke:#01579b,color:#01579b,stroke-width:2px
