@@ -33,11 +33,14 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			}
 			.content-wrapper {
 				position: relative;
-				z-index: 10;
+				/* Lowered z-index to prevent overlap with zoom */
+				z-index: 1;
 				background-color: var(--bg-color);
 				margin-top: -5vh;
 				padding-top: 0;
 			}
+>>>>+++ REPLACE
+
 			.reveal-spacer {
 				height: 10vh;
 				background: linear-gradient(
@@ -66,6 +69,17 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				margin: 0;
 				padding: 0;
 			}
+			/* Fix medium-zoom z-index issues */
+			:global(.medium-zoom-overlay) {
+				z-index: 1000 !important;
+			}
+			:global(.medium-zoom-image--opened) {
+				z-index: 1001 !important;
+			}
+>>>>+++ REPLACE
+
+>>>>+++ REPLACE
+
 			.prose {
 				width: 100%;
 				max-width: 100%;
@@ -226,6 +240,21 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				</aside>
 			</div>
 		</main>
+
+
+		<script>
+			import mediumZoom from 'medium-zoom';
+
+			// We initialize the zoom on images inside the article
+			// The selector '.prose img' usually works for the default Astro blog, 
+			// but 'article img' is safer based on your file name.
+			mediumZoom('article img', {
+				margin: 24,
+				background: 'rgba(0,0,0,0.9)', // Darker background for contrast
+			});
+    	</script>
+
+		
 		<Footer />
 		<script is:inline>
 			const slugify = (text) =>
