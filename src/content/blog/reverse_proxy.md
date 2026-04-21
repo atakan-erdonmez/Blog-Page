@@ -2,7 +2,7 @@
 title: "Designing a Reverse Proxy Gateway"
 description: "My experience while designing an ingress gateway to my internal infrastructure"
 pubDate: "2026-04-20"
-heroImage: '../../assets/gateway_proxy_image_2.png'
+heroImage: '../../assets/gateway_proxy_image.png'
 ---
 
 In a typical infrastructure, internal services are exposed using either a VPN, or port forwarding combined with a reverse proxy.
