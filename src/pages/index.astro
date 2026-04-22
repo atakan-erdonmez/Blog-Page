@@ -9,6 +9,7 @@ import blogLogo from '../assets/blog logo.png';
 import kbLogo from '../assets/kb logo.png';
 import projectPortfolio from '../assets/project_portfolio.png';
 import internalWiki from '../assets/internal_wiki.png';
+import photoMe from '../assets/photo_me.jpg';
 ---
 
 <!doctype html>
@@ -34,7 +35,7 @@ import internalWiki from '../assets/internal_wiki.png';
         </div>
 
         <div class="hero-photo">
-          <div class="photo-placeholder">Photo</div>
+          <img class="hero-photo-img" src={photoMe.src} alt="Atakan Erdonmez" />
         </div>
       </section>
 
@@ -60,7 +61,7 @@ import internalWiki from '../assets/internal_wiki.png';
           >
             <img class="brand-logo" src={githubLogo.src} alt="GitHub" />
           </a>
-          <a class="uniform-link social-hover" href="/blog" data-hover-text="Take a look at my posts">
+          <a class="uniform-link social-hover" href="/blog" data-hover-text="Coming soon...">
             <img class="brand-logo" src={blogLogo.src} alt="Blog" />
           </a>
           <a class="uniform-link social-hover" href="#" data-hover-text="Coming soon...">
@@ -136,16 +137,11 @@ import internalWiki from '../assets/internal_wiki.png';
     align-items: center;
   }
 
-  .photo-placeholder {
+  .hero-photo-img {
     width: min(100%, 360px);
     aspect-ratio: 1 / 1;
     border-radius: 24px;
-    background: linear-gradient(135deg, #232836, #151922);
-    border: 1px solid var(--card-border);
-    display: grid;
-    place-items: center;
-    color: var(--text-soft);
-    font-size: 1rem;
+    object-fit: cover;
   }
 
   .links-section {
