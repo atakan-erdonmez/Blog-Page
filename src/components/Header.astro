@@ -1,11 +1,16 @@
 ---
 import { SITE_TITLE } from '../consts';
+import personalLogo from '../assets/personal_logo.jpg';
 import HeaderLink from './HeaderLink.astro';
 ---
 
 <header>
 	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
+		<h2>
+			<a href="/">
+				<img src={personalLogo.src} alt="Personal Logo" width="50" height="50" />
+			</a>
+		</h2>
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
