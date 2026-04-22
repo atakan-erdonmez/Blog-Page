@@ -1,51 +1,106 @@
 ---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
-import Layout from '../layouts/BlogPost.astro';
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage={AboutHeroImage}
->
-	<p>
-		I’m an IT Specialist focused on infrastructure, cloud, and automation, with hands-on experience managing and 
-		optimizing systems at scale. Currently, I work at TUI Group, where I support and maintain enterprise environments,
-		managing hundreds of endpoints and ensuring reliability across critical services.
-	</p>
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`About Me | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<article>
+				{AboutHeroImage && (
+					<div class="hero-image">
+						<img src={AboutHeroImage.src} alt="" />
+					</div>
+				)}
+				<div class="prose">
+					<div class="title">
+						<h1>About Me</h1>
+						<hr />
+					</div>
+					<p>
+						I’m an IT Specialist focused on infrastructure, cloud, and automation, with hands-on experience managing and 
+						optimizing systems at scale. Currently, I work at TUI Group, where I support and maintain enterprise environments,
+						managing hundreds of endpoints and ensuring reliability across critical services.
+					</p>
 
-	<p>
-		My work sits at the intersection of operations and engineering. I’m particularly interested in building systems 
-		that are not only functional, but maintainable, reproducible, and secure. This includes automating infrastructure 
-		with tools like Ansible, designing clean network architectures, and implementing practical solutions that reduce 
-		operational overhead while improving resilience.
-	</p>
+					<p>
+						My work sits at the intersection of operations and engineering. I’m particularly interested in building systems 
+						that are not only functional, but maintainable, reproducible, and secure. This includes automating infrastructure 
+						with tools like Ansible, designing clean network architectures, and implementing practical solutions that reduce 
+						operational overhead while improving resilience.
+					</p>
 
-	<p>
-		Before joining TUI, I gained experience in both structured enterprise environments and smaller, fast-paced teams.
-		 At Yamaha Motor Canada, I worked as a System Support Analyst, focusing on endpoint management, troubleshooting, 
-		 and IT operations within a corporate environment. Later, at San Franchise, I took on a broader role, handling 
-		 infrastructure, web systems, and general IT responsibilities, which strengthened my ability to work across multiple
-		  domains and adapt quickly.
-	</p>
+					<p>
+						Before joining TUI, I gained experience in both structured enterprise environments and smaller, fast-paced teams.
+						At Yamaha Motor Canada, I worked as a System Support Analyst, focusing on endpoint management, troubleshooting, 
+						and IT operations within a corporate environment. Later, at San Franchise, I took on a broader role, handling 
+						infrastructure, web systems, and general IT responsibilities, which strengthened my ability to work across multiple
+						domains and adapt quickly.
+					</p>
 
-	<p>
-		Outside of my professional role, I actively build and document infrastructure projects in my homelab. This environment 
-		allows me to experiment with technologies such as Linux server administration, containerization, reverse proxy 
-		architectures, and cloud integrations. I focus on real-world scenarios—secure remote access, backup strategies, 
-		monitoring, and automation—treating these projects as production-like systems rather than simple experiments.
-	</p>
+					<p>
+						Outside of my professional role, I actively build and document infrastructure projects in my homelab. This environment 
+						allows me to experiment with technologies such as Linux server administration, containerization, reverse proxy 
+						architectures, and cloud integrations. I focus on real-world scenarios—secure remote access, backup strategies, 
+						monitoring, and automation—treating these projects as production-like systems rather than simple experiments.
+					</p>
 
-	<p>
-		I’m currently expanding my expertise in cloud architecture and infrastructure as code, with a particular focus on
-		 AWS and Terraform. My goal is to deepen my ability to design scalable, reliable systems and transition further 
-		 into cloud-focused engineering roles.
-	</p>
+					<p>
+						I’m currently expanding my expertise in cloud architecture and infrastructure as code, with a particular focus on
+						AWS and Terraform. My goal is to deepen my ability to design scalable, reliable systems and transition further 
+						into cloud-focused engineering roles.
+					</p>
 
-	<p>
-		This website serves as a central hub for my work—bringing together my blog, technical documentation, and projects. 
-		I aim to share practical insights, clear architectural thinking, and lessons learned from building and operating 
-		systems in real environments.
-	</p>
-</Layout>
+					<p>
+						This website serves as a central hub for my work—bringing together my blog, technical documentation, and projects. 
+						I aim to share practical insights, clear architectural thinking, and lessons learned from building and operating 
+						systems in real environments.
+					</p>
+				</div>
+			</article>
+		</main>
+		<Footer />
+		<style>
+			main {
+				width: calc(100% - 2em);
+				max-width: 720px;
+				margin: 0 auto;
+				padding: 3em 1em;
+			}
+			.hero-image {
+				width: 100%;
+			}
+			.hero-image img {
+				display: block;
+				margin: 0 auto;
+				border-radius: 12px;
+				box-shadow: var(--box-shadow);
+			}
+			.prose {
+				padding: 1em;
+				color: rgb(var(--gray-dark));
+			}
+			.title {
+				margin-bottom: 1em;
+				padding: 1em 0;
+				text-align: center;
+				line-height: 1;
+			}
+			.title h1 {
+				margin: 0 0 0.5em 0;
+			}
+			hr {
+				border-top: 1px solid rgb(var(--gray-light));
+				margin-bottom: 1rem;
+			}
+		</style>
+	</body>
+</html>
