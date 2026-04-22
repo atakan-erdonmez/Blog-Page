@@ -150,9 +150,11 @@ import photoMe from '../assets/photo_me.jpg';
 
   .uniform-links {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columns, 3 rows */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1rem;
-    max-width: 640px; /* Adjusted for 2 columns */
+    max-width: 100%; /* Adjusted to fill total width */
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .uniform-link {
@@ -217,9 +219,10 @@ import photoMe from '../assets/photo_me.jpg';
     opacity: 1;
   }
 
-  @media (max-width: 900px) {
+@media (max-width: 900px) {
     .hero {
       grid-template-columns: 1fr;
+      text-align: center; /* Center content on smaller screens */
     }
 
     .links-section {
@@ -227,15 +230,14 @@ import photoMe from '../assets/photo_me.jpg';
     }
 
     .uniform-links {
-      grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columns on smaller screens */
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjusted for smaller screens */
       max-width: 100%;
     }
   }
 
   @media (max-width: 768px) {
-    /* Adjust for medium screens to maintain 2 columns */
     .uniform-links {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Adjusted for medium screens */
     }
   }
 
