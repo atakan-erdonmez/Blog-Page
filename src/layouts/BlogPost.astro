@@ -119,8 +119,8 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				display: grid;
 				gap: 0.25rem;
 			}
-			.toc-list a,
-			.toc-list a:visited {
+			:global(.toc-list a),
+			:global(.toc-list a:visited) {	
 				display: block;
 				text-decoration: none !important;
 				color: rgb(var(--gray-dark)) !important;
@@ -139,17 +139,17 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				display: grid;
 				gap: 0.3rem;
 			}
-			.toc-list li.toc-h3 a,
-			.toc-list li.toc-h3 a:visited {
+			:global(.toc-list li.toc-h3 a),
+			:global(.toc-list li.toc-h3 a:visited) {
 				font-size: 0.85rem;
 				color: rgb(var(--gray-dark)) !important;
 			}
-			.toc-list a.active,
-			.toc-list a.active:visited {
-				color: #ff9d00 !important;
+			:global(.toc-list a.active),
+			:global(.toc-list a.active:visited) {
+				color: rgb(var(--gray-dark)) !important;
 				font-weight: 600 !important;
 			}
-			.toc-list a:hover {
+			:global(.toc-list a:hover) {
 				color: rgb(var(--gray-dark));
 			}
 			.toc-empty {
@@ -319,7 +319,11 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 						tocLink.classList.toggle('active', tocLink.dataset.targetId === id);
 					});
 				};
-
+				tocLinks.forEach((tocLink) => {
+					tocLink.addEventListener('click', () => {
+						setActiveLink(tocLink.dataset.targetId);
+					});
+				});
 				const headingById = new Map(
 					headings.map((heading) => [heading.id, heading])
 				);
