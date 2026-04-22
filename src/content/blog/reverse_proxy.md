@@ -82,7 +82,7 @@ With these constraints in mind, the following design decisions were made:
 
 ### Static IP
 
-One option was to obtain a static IP and expose services directly via port forwarding.
+One option was to obtain a static IP and expose services directly via port forwarding. 
 
 While this simplifies the architecture, it introduces direct exposure of the home network to the internet, including automated scanning, bot traffic, and potential denial-of-service scenarios. It also tightly couples external availability to the stability of the home environment.
 
