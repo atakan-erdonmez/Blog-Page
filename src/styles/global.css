@@ -74,7 +74,7 @@ p {
 	margin-bottom: 1em;
 }
 .prose p {
-	margin-bottom: 2em;
+	margin-bottom: 1em;
 }
 textarea {
 	width: 100%;
@@ -97,8 +97,10 @@ code {
 	border-radius: 2px;
 }
 pre {
-	padding: 1.5em;
+	padding: 0.9em 1.1em;
 	border-radius: 8px;
+	font-size: 0.92rem;
+	line-height: 1.3;
 }
 pre > code {
 	all: unset;
@@ -138,4 +140,13 @@ hr {
 	clip-path: inset(50%);
 	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
+}
+.prose h2 {
+	margin-top: 1.3em;
+	margin-bottom: 0.6em;
+}
+
+.prose h3 {
+	margin-top: 1em;
+	margin-bottom: 0.4em;
 }

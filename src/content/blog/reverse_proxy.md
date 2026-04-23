@@ -63,6 +63,8 @@ style Nginx_SVC fill:#fff,stroke:#0277bd,stroke-width:2px
 ```
 
 ## Problem
+---
+
 
 My setup is constrained by the following:
 
@@ -79,6 +81,7 @@ As a result, the ingress solution must:
 
 With these constraints in mind, the following design decisions were made:
 ## Design Decisions
+---
 
 ### Static IP
 
@@ -173,9 +176,13 @@ Operational tasks are separated into distinct stages. In particular, Nginx insta
         daemon_reload: yes
 ```
 
-Task files can be seen in: [[https://github.com/atakan-erdonmez/homelab/tree/main/infrastructure/app_proxy/tasks|GitHub]]
+Task files can be seen in
+<a href="https://github.com/atakan-erdonmez/homelab/tree/main/infrastructure/app_proxy/tasks" target="_blank" rel="noopener">
+GitHub
+</a>
 
 ## Implementation
+---
 
 The final setup is implemented as an Ansible-managed ingress gateway.
 
@@ -196,7 +203,9 @@ The playbook is structured to separate initial setup from ongoing configuration 
 
 > The full configuration and playbooks are available in the repository:  
 > [App Proxy](https://github.com/atakan-erdonmez/homelab/tree/main/infrastructure/app_proxy) & [Management Proxy](https://github.com/atakan-erdonmez/homelab/tree/main/infrastructure/management_proxy)
+
 ## Final Architecture
+---
 
 The resulting system consists of two isolated ingress paths:
 
@@ -212,10 +221,13 @@ This creates a layered model where:
 - Ansible maintains configuration consistency
 
 ## Lessons Learned
+---
+
 - Cloudflared networking behavior differs between Docker bridge and host mode, which can break localhost routing if not handled explicitly
 - Separating tunnels across nodes simplified isolation but increased coordination complexity during initial setup
 
 ## Conclusion
+---
 
 This setup evolved from a simple requirement, exposing services behind CGNAT, into a structured ingress system with clear separation, controlled exposure, and automated management.
 
