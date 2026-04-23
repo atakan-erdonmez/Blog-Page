@@ -34,7 +34,7 @@ body {
 	flex-direction: column;
 }
 main {
-	width: min(55%, 900px);
+	width: min(50%, 800px);
 	max-width: calc(100% - 2em);
 	margin: auto;
 	padding: 3em 1em;
