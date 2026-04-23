@@ -166,30 +166,3 @@ hr {
 }
 
 
-.prose .mermaid,
-.prose svg[id^="mermaid"],
-.prose picture:has(svg[id^="mermaid"]) {
-	display: block;
-	max-width: 100%;
-	overflow-x: auto;
-	-webkit-overflow-scrolling: touch;
-}
-
-.prose svg[id^="mermaid"] {
-	display: block;
-	height: auto;
-	min-width: 700px;
-	max-width: none;
-}
-
-.prose .mermaid {
-	overflow-x: auto;
-	-webkit-overflow-scrolling: touch;
-}
-
-.prose .mermaid svg {
-	display: block;
-	height: auto;
-	min-width: 700px;
-	max-width: none;
-}
