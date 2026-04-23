@@ -39,7 +39,6 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				margin-top: -5vh;
 				padding-top: 0;
 			}
->>>>+++ REPLACE
 
 			.reveal-spacer {
 				height: 10vh;
@@ -54,12 +53,14 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				--bg-color: #ffffff;
 				background-color: var(--bg-color);
 				padding-top: 2rem;
-				width: min(1380px, calc(100% - 2em));
+				width: min(100%, 1380px);
+				max-width: calc(100% - 2em);
 				margin: 0 auto;
 				display: grid;
 				grid-template-columns: minmax(0, 1fr) 240px;
 				gap: 3rem;
 				align-items: start;
+				box-sizing: border-box;
 			}
 
 			/* Adjust existing main/prose styles to fit new structure */
@@ -76,9 +77,6 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			:global(.medium-zoom-image--opened) {
 				z-index: 1001 !important;
 			}
->>>>+++ REPLACE
-
->>>>+++ REPLACE
 
 			.prose {
 				width: 100%;
@@ -86,6 +84,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				min-width: 0;
 				margin: 0;
 				padding: 1em;
+				box-sizing: border-box;
 				color: rgb(var(--gray-dark));
 			}
 			/* Ensure header is on top */
@@ -179,6 +178,9 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				.hero-image-container {
 					width: calc(100% - 2em);
 					height: 30vh;
+					padding-left: 1.25rem;
+					padding-right: 1.25rem;
+					box-sizing: border-box;
 				}
 				.reveal-spacer {
 					height: 10vh;
@@ -197,6 +199,11 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 					max-height: none;
 					padding: 0;
 					width: 100%;
+				}
+				.post-layout,
+				.prose,
+				.toc {
+					min-width: 0;
 				}
 			}
 		</style>
