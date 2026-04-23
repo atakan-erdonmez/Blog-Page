@@ -9,7 +9,6 @@ import blogLogo from '../assets/blog logo.png';
 import kbLogo from '../assets/kb logo.png';
 import projectPortfolio from '../assets/project_portfolio.png';
 import internalWiki from '../assets/internal_wiki.png';
-import photoMe from '../assets/photo_me.jpg';
 ---
 
 <!doctype html>
@@ -24,18 +23,15 @@ import photoMe from '../assets/photo_me.jpg';
         <div class="hero-text">
           <p class="eyebrow">Infrastructure • Cloud • Automation</p>
           <h1>Atakan Erdonmez</h1>
-          <p>
-            I build and document infrastructure, automation workflows, and self-hosted systems.
-            This site is the central entry point for my blog, knowledge base, portfolio, and other projects.
+          <p class="hero-lead">
+            I design and document secure, practical infrastructure with a focus on
+            automation, reproducibility, and maintainable operations.
           </p>
           <p>
-            My focus is on practical engineering: clear architecture, reproducible deployments,
-            and systems that are actually maintainable.
+            This site is the central entry point for my blog, knowledge base,
+            portfolio, and other work. Most of what I build sits around self-hosted
+            systems, ingress design, infrastructure as code, and operational clarity.
           </p>
-        </div>
-
-        <div class="hero-photo">
-          <img class="hero-photo-img" src={photoMe.src} alt="Atakan Erdonmez" />
         </div>
       </section>
 
@@ -51,6 +47,7 @@ import photoMe from '../assets/photo_me.jpg';
           >
             <img class="brand-logo" src={linkedinLogo.src} alt="LinkedIn" />
           </a>
+
           <a
             class="uniform-link social-hover"
             href="https://github.com/atakan-erdonmez"
@@ -61,15 +58,23 @@ import photoMe from '../assets/photo_me.jpg';
           >
             <img class="brand-logo" src={githubLogo.src} alt="GitHub" />
           </a>
-          <a class="uniform-link social-hover" href="/blog" data-hover-text="Write-ups on infrastructure decisions and implementations">
+
+          <a
+            class="uniform-link social-hover"
+            href="/blog"
+            data-hover-text="Write-ups on infrastructure decisions and implementations"
+          >
             <img class="brand-logo" src={blogLogo.src} alt="Blog" />
           </a>
+
           <a class="uniform-link social-hover" href="#" data-hover-text="Coming soon...">
             <img class="brand-logo" src={kbLogo.src} alt="Knowledge Base" />
           </a>
+
           <a class="uniform-link social-hover" href="#" data-hover-text="Coming soon...">
             <img class="brand-logo" src={projectPortfolio.src} alt="Project Portfolio" />
           </a>
+
           <a class="uniform-link social-hover" href="#" data-hover-text="Coming soon...">
             <img class="brand-logo" src={internalWiki.src} alt="Internal Wiki" />
           </a>
@@ -87,6 +92,7 @@ import photoMe from '../assets/photo_me.jpg';
     --card-border: #d7dde8;
     --text-main: #f3f4f6;
     --text-soft: #b8bec9;
+    --text-muted: #8e97a7;
   }
 
   body {
@@ -97,51 +103,50 @@ import photoMe from '../assets/photo_me.jpg';
   .landing {
     max-width: 1500px;
     margin: 0 auto;
-    padding: 3rem 1.5rem 4rem;
+    padding: 4.5rem 1.5rem 4rem;
   }
 
   .hero {
-    display: grid;
-    grid-template-columns: 1.3fr 0.9fr;
-    gap: 3rem;
-    align-items: center;
-    margin-bottom: 3rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .hero-text {
+    max-width: 820px;
   }
 
   .eyebrow {
-    margin: 0 0 0.75rem;
-    font-size: 0.85rem;
+    margin: 0 0 1rem;
+    font-size: 0.82rem;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-soft);
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
   }
 
   .hero h1 {
-    margin: 0 0 1rem;
-    font-size: clamp(2.3rem, 5vw, 4.5rem);
-    line-height: 1.05;
+    margin: 0 0 1.1rem;
+    font-size: clamp(2.8rem, 7vw, 5.4rem);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
     color: var(--text-main);
+    max-width: 10ch;
+  }
+
+  .hero-lead {
+    margin: 0 0 1rem;
+    max-width: 38ch;
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    line-height: 1.5;
+    color: var(--text-main);
+    font-weight: 500;
   }
 
   .hero p {
     max-width: 62ch;
-    margin: 0 0 1rem;
-    font-size: 1.05rem;
-    line-height: 1.75;
+    margin: 0;
+    font-size: 1.02rem;
+    line-height: 1.8;
     color: var(--text-soft);
-  }
-
-  .hero-photo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .hero-photo-img {
-    width: min(100%, 360px);
-    aspect-ratio: 1 / 1;
-    border-radius: 24px;
-    object-fit: cover;
   }
 
   .links-section {
@@ -152,7 +157,7 @@ import photoMe from '../assets/photo_me.jpg';
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1rem;
-    max-width: 100%; /* Adjusted to fill total width */
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
   }
@@ -219,30 +224,39 @@ import photoMe from '../assets/photo_me.jpg';
     opacity: 1;
   }
 
-@media (max-width: 900px) {
-    .hero {
-      grid-template-columns: 1fr;
-      text-align: center; /* Center content on smaller screens */
+  @media (max-width: 900px) {
+    .landing {
+      padding-top: 3.5rem;
     }
 
-    .links-section {
-      margin-top: 0;
+    .hero {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .hero-text {
+      margin: 0 auto;
+    }
+
+    .hero h1,
+    .hero-lead,
+    .hero p {
+      max-width: none;
     }
 
     .uniform-links {
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjusted for smaller screens */
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       max-width: 100%;
     }
   }
 
   @media (max-width: 768px) {
     .uniform-links {
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Adjusted for medium screens */
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     }
   }
 
   @media (max-width: 480px) {
-    /* Adjust for extra small screens to 1 column */
     .uniform-links {
       grid-template-columns: repeat(1, minmax(0, 1fr));
     }
