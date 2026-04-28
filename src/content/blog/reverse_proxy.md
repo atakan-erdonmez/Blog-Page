@@ -11,56 +11,7 @@ In my case, CGNAT on my home internet eliminates the possibility of port forward
 
 To address this, I designed and automated a gateway layer using Cloudflared and Nginx, managed using Ansible as Infrastructure as Code (IaC). This allows service exposure and routing to be defined declaratively, with consistent deployment, validation, and minimal manual intervention.
 
-```mermaid
-graph LR
-
-%% External Entity
-User((👤 User)) -- "HTTPS" --> CF
-
-subgraph CF_EDGE ["<span style='font-size: 48px;'>☁️ Cloudflare Edge&nbsp;&nbsp;&nbsp;</span>"]
-    direction TB
-    CF{🛡️ WAF / DNS} --> Auth["🔒 Access MFA&nbsp;"]
-    Auth --> Tunnel_Edge["🛣️ Tunnel Endpoint&nbsp;"]
-end
-
-%% --- Path 1: Management ---
-Tunnel_Edge -.-> |"Management Tunnel"| CT_MGMT["🚀 cloudflared&nbsp;"]
-
-subgraph RPI ["<span style='font-size: 32px;'>🧠 Raspberry Pi&nbsp;&nbsp;</span>"]
-    direction TB
-    CT_MGMT --> Nginx_MGMT["🌐 Nginx Proxy&nbsp;"]
-end
-
-subgraph LAN_MGMT ["<span style='font-size: 26px;'>🖥️ Management Network&nbsp;&nbsp;</span>"]
-    direction TB
-    Nginx_MGMT ==> |pve1-lab| PVE["🖥️ Proxmox&nbsp;"]
-    Nginx_MGMT ==> |nas-lab| NAS["💾 NAS&nbsp;"]
-end
-
-%% --- Path 2: Service ---
-Tunnel_Edge -.-> |"Service Tunnel"| CT_SVC["🚀 cloudflared&nbsp;"]
-
-subgraph LXC ["<span style='font-size: 32px;'>📦 LXC Container&nbsp;&nbsp;</span>"]
-    direction TB
-    CT_SVC --> Nginx_SVC["🌐 Nginx Proxy&nbsp;"]
-end
-
-subgraph LAN_SVC ["<span style='font-size: 26px;'>🖥️ Service Network&nbsp;&nbsp;</span>"]
-    direction TB
-    Nginx_SVC ==> |website| WEB["🖥️ Web Server&nbsp;"]
-    Nginx_SVC ==> |media| MEDIA["🎞️ Media Server&nbsp;"]
-end
-
-%% Styling
-style CF_EDGE fill:#fdf6e3,stroke:#eee8d5,color:#586e75,stroke-width:2px
-style RPI fill:#e1f5fe,stroke:#01579b,color:#01579b,stroke-width:2px
-style LXC fill:#e1f5fe,stroke:#01579b,color:#01579b,stroke-width:2px
-style LAN_MGMT fill:#f1f8e9,stroke:#33691e,color:#33691e,stroke-width:2px
-style LAN_SVC fill:#f1f8e9,stroke:#33691e,color:#33691e,stroke-width:2px
-style Auth fill:#fff,stroke:#d32f2f,stroke-width:2px
-style Nginx_MGMT fill:#fff,stroke:#0277bd,stroke-width:2px
-style Nginx_SVC fill:#fff,stroke:#0277bd,stroke-width:2px
-```
+![Architecture](../../assets/reverse_proxy_diagram.svg)
 
 ## Problem
 ---
