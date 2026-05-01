@@ -2,7 +2,7 @@
 title: Designing a Reverse Proxy Gateway
 description: My experience while designing an ingress gateway to my internal infrastructure
 pubDate: 2026-04-20
-heroImage: ../../assets/reverse_proxy_banner.png
+heroImage: ../Images/reverse_proxy_banner.png
 ---
 
 In a typical infrastructure, internal services are exposed using either a VPN, or port forwarding combined with a reverse proxy.
@@ -11,7 +11,7 @@ In my case, CGNAT on my home internet eliminates the possibility of port forward
 
 To address this, I designed and automated a gateway layer using Cloudflared and Nginx, managed using Ansible as Infrastructure as Code (IaC). This allows service exposure and routing to be defined declaratively, with consistent deployment, validation, and minimal manual intervention.
 
-![Architecture](../../assets/reverse_proxy_diagram.svg)
+![Architecture](../Images/reverse_proxy_diagram.svg)
 ## Problem
 ---
 
