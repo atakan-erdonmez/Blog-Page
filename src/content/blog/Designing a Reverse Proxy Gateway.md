@@ -134,7 +134,7 @@ Operational tasks are separated into distinct stages. In particular, Nginx insta
         daemon_reload: yes
 ```
 
-Task files can be seen in: [[https://github.com/atakan-erdonmez/homelab/tree/main/infrastructure/app_proxy/tasks|GitHub]]
+Task files can be seen in: [Github](https://github.com/atakan-erdonmez/homelab/tree/main/infrastructure/app_proxy/tasks)
 
 ## Implementation
 ---
