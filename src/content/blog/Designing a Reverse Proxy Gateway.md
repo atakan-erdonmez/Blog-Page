@@ -11,9 +11,7 @@ In my case, CGNAT on my home internet eliminates the possibility of port forward
 
 To address this, I designed and automated a gateway layer using Cloudflared and Nginx, managed using Ansible as Infrastructure as Code (IaC). This allows service exposure and routing to be defined declaratively, with consistent deployment, validation, and minimal manual intervention.
 
-  
-![[reverse_proxy_diagram.svg]]
-
+![Architecture](../../assets/reverse_proxy_diagram.svg)
 ## Problem
 ---
 
