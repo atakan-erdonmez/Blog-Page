@@ -26,7 +26,7 @@ As a result, the ingress solution must:
 - operate without inbound connections,
 - support restricted network environments,
 - and enforce clear separation between control plane and user traffic.
-- 
+
 With these constraints in mind, the following design decisions were made:
 
 ## Design Decisions
