@@ -1,0 +1,27 @@
+name: Build and Deploy the Astro page
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install and Build
+        run: |
+          npm install
+          npm run build
+
+      - name: Deploy to VPS
+        uses: easingthemes/ssh-deploy@main
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
+          ARGS: "-rlgoDzvc -i --delete"
+          SOURCE: "dist/" # The folder Astro builds into
+          REMOTE_HOST: ${{ secrets.VPS_IP }}
+          REMOTE_USER: "deploy-bot" # Using the restricted user
+          TARGET: "/var/www/astro-blog" # The folder the user owns
