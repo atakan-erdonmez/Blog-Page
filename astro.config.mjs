@@ -7,11 +7,6 @@ import { defineConfig, fontProviders } from 'astro/config';
 
 export default defineConfig({
     markdown: {
-        syntaxHighlight: {
-            excludeLangs: ['mermaid'],
-        },
-
-
     },
 
     site: 'https://example.com',
