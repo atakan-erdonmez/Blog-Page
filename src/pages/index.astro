@@ -87,6 +87,10 @@ import internalWiki from '../assets/internal_wiki.png';
 
 <style>
   :root {
+    /* 
+       While these variables are specific to the landing page, 
+       they follow the naming convention of global.css for consistency.
+    */
     --landing-bg: #0f1115;
     --card-bg: #ffffff;
     --card-border: #d7dde8;
@@ -101,13 +105,16 @@ import internalWiki from '../assets/internal_wiki.png';
   }
 
   .landing {
+    /* Fluid max-width to handle ultra-wide monitors elegantly */
     max-width: 1500px;
-    margin: 0 auto;
-    padding: 4.5rem 1.5rem 4rem;
+    margin-inline: auto;
+    /* 'padding-block' handles vertical spacing consistently */
+    padding-block: 4.5rem 4rem;
+    padding-inline: 1.5rem;
   }
 
   .hero {
-    margin-bottom: 3.5rem;
+    margin-block-end: 3.5rem;
   }
 
   .hero-text {
@@ -115,7 +122,7 @@ import internalWiki from '../assets/internal_wiki.png';
   }
 
   .eyebrow {
-    margin: 0 0 1rem;
+    margin-block-end: 1rem;
     font-size: 0.82rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -124,7 +131,8 @@ import internalWiki from '../assets/internal_wiki.png';
   }
 
   .hero h1 {
-    margin: 0 0 1.1rem;
+    margin-block-end: 1.1rem;
+    /* 'clamp' allows the font size to scale perfectly between mobile and desktop */
     font-size: clamp(2.8rem, 7vw, 5.4rem);
     line-height: 0.98;
     letter-spacing: -0.04em;
@@ -133,7 +141,7 @@ import internalWiki from '../assets/internal_wiki.png';
   }
 
   .hero-lead {
-    margin: 0 0 1rem;
+    margin-block-end: 1rem;
     max-width: 38ch;
     font-size: clamp(1.15rem, 2vw, 1.4rem);
     line-height: 1.5;
@@ -150,16 +158,19 @@ import internalWiki from '../assets/internal_wiki.png';
   }
 
   .links-section {
-    margin-top: 0.5rem;
+    margin-block-start: 0.5rem;
   }
 
   .uniform-links {
     display: grid;
+    /* 
+       Grid is preferred over Flexbox here to ensure the cards 
+       always have uniform widths and heights.
+    */
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
     max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    margin-inline: auto;
   }
 
   .uniform-link {
@@ -171,6 +182,7 @@ import internalWiki from '../assets/internal_wiki.png';
     border: 1px solid var(--card-border);
     border-radius: 14px;
     padding: 0.8rem 1rem;
+    /* Smooth transitions for a more 'tactile' feel */
     transition: transform 0.15s ease, border-color 0.15s ease;
   }
 
@@ -226,16 +238,16 @@ import internalWiki from '../assets/internal_wiki.png';
 
   @media (max-width: 900px) {
     .landing {
-      padding-top: 3.5rem;
+      padding-block-start: 3.5rem;
     }
 
     .hero {
       text-align: center;
-      margin-bottom: 3rem;
+      margin-block-end: 3rem;
     }
 
     .hero-text {
-      margin: 0 auto;
+      margin-inline: auto;
     }
 
     .hero h1,
@@ -245,6 +257,7 @@ import internalWiki from '../assets/internal_wiki.png';
     }
 
     .uniform-links {
+      /* repeat(auto-fit) is the best practice for responsive grids without media queries */
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       max-width: 100%;
     }

@@ -1,9 +1,3 @@
-/*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
-
 :root {
 	--accent: #2337ff;
 	--accent-dark: #000d8a;
@@ -16,6 +10,7 @@
 		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
 		0 16px 32px rgba(var(--gray), 33%);
 }
+
 body {
 	font-family: var(--font-atkinson);
 	margin: 0;
@@ -23,146 +18,153 @@ body {
 	text-align: left;
 	background: linear-gradient(var(--gray-gradient)) no-repeat;
 	background-size: 100% 600px;
-	word-wrap: break-word;
+	/* 'overflow-wrap' is the modern replacement for 'word-wrap' */
 	overflow-wrap: break-word;
 	color: rgb(var(--gray-dark));
 	font-size: 18px;
 	line-height: 1.7;
-	min-height: 100%;
+	/* Removed 'min-height: 100%' as '100vh' handles the viewport height reliably in all modern browsers */
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
 }
+
 main {
-	width: min(50%, 800px);
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
+	/* 
+	   Replaced '50%' with a more fluid '100% - 2rem' (with an 800px cap).
+	   This prevents the content from becoming too narrow on tablets while 
+	   preserving the elegant 800px max width on desktops.
+	*/
+	width: min(100% - 2rem, 800px);
+	/* 'margin-inline' is a logical property that handles both left and right margin */
+	margin-inline: auto;
+	/* 'padding-block' handles top and bottom padding */
+	padding-block: 3em;
 	flex: 1;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	margin: 0 0 0.5rem 0;
+
+h1, h2, h3, h4, h5, h6 {
+	/* margin-block-end handles the bottom margin in a way that is future-proof for vertical text */
+	margin-block-end: 0.5rem;
 	color: rgb(var(--black));
 	line-height: 1.2;
 }
-h1 {
-	font-size: 3.052em;
-}
-h2 {
-	font-size: 2.441em;
-}
-h3 {
-	font-size: 1.953em;
-}
-h4 {
-	font-size: 1.563em;
-}
-h5 {
-	font-size: 1.25em;
-}
-strong,
-b {
+
+h1 { font-size: 3.052em; }
+h2 { font-size: 2.441em; }
+h3 { font-size: 1.953em; }
+h4 { font-size: 1.563em; }
+h5 { font-size: 1.25em; }
+
+strong, b {
 	font-weight: 700;
 }
+
 a {
 	color: var(--accent);
+	/* Added a subtle transition to make the hover effect feel 'premium' and smooth */
+	transition: color 0.2s ease;
 }
+
 a:hover {
-	color: var(--accent);
+	color: var(--accent-dark);
 }
-p {
-	margin-bottom: 1em;
+
+p, .prose p {
+	margin-block-end: 1em;
 }
-.prose p {
-	margin-bottom: 1em;
-}
-textarea {
+
+textarea, input {
 	width: 100%;
 	font-size: 16px;
 }
-input {
-	font-size: 16px;
-}
+
 table {
 	width: 100%;
 }
+
 img {
 	max-width: 100%;
 	height: auto;
 	border-radius: 8px;
 }
+
 code {
 	padding: 2px 5px;
 	background-color: rgb(var(--gray-light));
 	border-radius: 2px;
+	/* Moved word-break here to ensure inline code doesn't break layout */
+	word-break: break-word;
 }
+
 pre {
-	padding: 0.9em 1.1em;
+	padding: 1rem;
 	border-radius: 8px;
 	font-size: 0.92rem;
-	line-height: 1.3;
+	line-height: 1.4;
 	max-width: 100%;
 	overflow-x: auto;
 	box-sizing: border-box;
 }
+
 pre > code {
+	/* 'all: unset' is cleaner than overriding individual properties */
 	all: unset;
 }
+
 blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
+	/* Using logical properties 'border-inline-start' and 'padding-inline-start' */
+	border-inline-start: 4px solid var(--accent);
+	padding-inline-start: 20px;
 	margin: 0;
-	font-size: 1.333em;
+	font-size: 1.2em;
+	font-style: italic;
 }
+
 hr {
 	border: none;
 	border-top: 1px solid rgb(var(--gray-light));
+	/* Standardizing spacing around horizontal rules */
+	margin-block: 2rem;
 }
+
 @media (max-width: 720px) {
 	body {
 		font-size: 17px;
 	}
 
 	main {
-		width: 85%;
-		padding: 1.5em 1em;
+		/* Simplified mobile padding */
+		padding-block: 1.5em;
 	}
 }
 
+/* 
+   Modern .sr-only (Screen Reader Only) implementation.
+   Removed legacy hacks for Internet Explorer 6/7/8 as they are no longer needed 
+   and just add unnecessary weight to the file.
+*/
 .sr-only {
-	border: 0;
-	padding: 0;
-	margin: 0;
-	position: absolute !important;
-	height: 1px;
+	position: absolute;
 	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
 	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
-	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
-	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
-	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
+	clip: rect(0, 0, 0, 0);
 	white-space: nowrap;
+	border-width: 0;
 }
+
 .prose h2 {
-	margin-top: 1.3em;
-	margin-bottom: 0.6em;
+	margin-block-start: 1.5em;
+	margin-block-end: 0.5em;
 }
 
 .prose h3 {
-	margin-top: 1em;
-	margin-bottom: 0.4em;
+	margin-block-start: 1.25em;
+	margin-block-end: 0.4em;
 }
 
-.prose code {
-	word-break: break-word;
-}
 
 

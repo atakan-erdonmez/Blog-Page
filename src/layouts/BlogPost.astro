@@ -263,8 +263,13 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
 		
 		<Footer />
-		<script is:inline>
-			const slugify = (text) =>
+		<script>
+			/*
+			  By removing 'is:inline', Astro will now bundle, minify, and optimize 
+			  this script. This improves performance because the browser can 
+			  cache the script file after the first load.
+			*/
+			const slugify = (text: string) =>
 				text
 					.toLowerCase()
 					.trim()
@@ -274,13 +279,14 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			const prose = document.querySelector('.prose');
 			const tocList = document.getElementById('toc-list');
 			const emptyState = document.getElementById('toc-empty');
-			const tocLinks = [];
+			const tocLinks: HTMLAnchorElement[] = [];
 
 			if (prose && tocList && emptyState) {
-				const headings = [...prose.querySelectorAll('h2, h3')];
-				let currentH2Item = null;
+				const headings = Array.from(prose.querySelectorAll('h2, h3')) as HTMLElement[];
+				let currentH2Item: HTMLLIElement | null = null;
 
 				headings.forEach((heading) => {
+					// Ensure every heading has an ID for the TOC to link to
 					if (!heading.id) {
 						heading.id = slugify(heading.textContent || '');
 					}
@@ -300,10 +306,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 					if (tagName === 'h2') {
 						tocList.appendChild(item);
 						currentH2Item = item;
-						return;
-					}
-
-					if (tagName === 'h3' && currentH2Item) {
+					} else if (tagName === 'h3' && currentH2Item) {
 						let sublist = currentH2Item.querySelector('.toc-sublist');
 						if (!sublist) {
 							sublist = document.createElement('ul');
@@ -311,30 +314,35 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 							currentH2Item.appendChild(sublist);
 						}
 						sublist.appendChild(item);
-						return;
+					} else {
+						tocList.appendChild(item);
 					}
-
-					tocList.appendChild(item);
 				});
 
+				// Toggle visibility of TOC based on whether headings were found
 				const hasItems = tocList.children.length > 0;
 				emptyState.hidden = hasItems;
 				tocList.hidden = !hasItems;
 
-				const setActiveLink = (id) => {
+				const setActiveLink = (id: string) => {
 					tocLinks.forEach((tocLink) => {
 						tocLink.classList.toggle('active', tocLink.dataset.targetId === id);
 					});
 				};
+
 				tocLinks.forEach((tocLink) => {
 					tocLink.addEventListener('click', () => {
-						setActiveLink(tocLink.dataset.targetId);
+						if (tocLink.dataset.targetId) {
+							setActiveLink(tocLink.dataset.targetId);
+						}
 					});
 				});
+
 				const headingById = new Map(
 					headings.map((heading) => [heading.id, heading])
 				);
 
+				// Using IntersectionObserver is best practice for 'ScrollSpy' functionality
 				const observer = new IntersectionObserver(
 					(entries) => {
 						const visible = entries
@@ -360,6 +368,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
 				headings.forEach((heading) => observer.observe(heading));
 
+				// Handle initial load with hash or default to first heading
 				const hashId = window.location.hash.replace('#', '');
 				if (hashId && headingById.has(hashId)) {
 					setActiveLink(hashId);
