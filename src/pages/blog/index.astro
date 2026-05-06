@@ -134,9 +134,19 @@ const latestPosts = (await getCollection('blog'))
     }
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 680px) {
     .posts-row {
       grid-template-columns: 1fr;
+      padding: 0 1rem;
+      max-width: 450px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 450px) {
+    .posts-row {
+      padding: 0;
+      max-width: 100%;
     }
   }
 </style>
