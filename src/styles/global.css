@@ -11,6 +11,10 @@
 		0 16px 32px rgba(var(--gray), 33%);
 }
 
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
 body {
 	font-family: var(--font-atkinson);
 	margin: 0;
@@ -20,6 +24,7 @@ body {
 	background-size: 100% 600px;
 	/* 'overflow-wrap' is the modern replacement for 'word-wrap' */
 	overflow-wrap: break-word;
+	overflow-x: hidden;
 	color: rgb(var(--gray-dark));
 	font-size: 18px;
 	line-height: 1.7;
