@@ -4,13 +4,14 @@ description: Designing a static website with automated content publishing using 
 pubDate: 2026-05-10
 heroImage: ../Images/automated_blog_banner.png
 ---
-
 For publishing my content, I needed a website. For this, I used an SSG (Static Site Generator) hosted on my personal VPS, with a fully automated pipeline for publishing content. 
 
 ## Purpose and Scope
+---
 I needed a website as a central platform to my professional work. The main purpose is to share blogs, projects, and content. It also serves as a gateway to my personal knowledge base, internal documentation, portfolio, and professional profiles (LinkedIn/GitHub)
 
 ## Requirements
+---
 Creating the website, priority requirements were:
 - **Speed and performance**: Functionality was preferred over aesthetics for content focused work, resulting in a server-first approach for rendering.
 - **Small footprint**: Since the resources on the server were limited, only the absolutely necessary components should be used. A database or a backend engine is not needed. 
