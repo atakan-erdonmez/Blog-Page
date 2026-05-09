@@ -23,15 +23,13 @@ import internalWiki from '../assets/internal_wiki.png';
         <div class="hero-text">
           <p class="eyebrow">Infrastructure • Cloud • Automation</p>
           <h1>Atakan Erdonmez</h1>
-          <p class="hero-lead">
+          <p>
             I am an infrastructure engineer working on cloud architecture, automation, and systems design.
           </p>
-          <br>
           <p>
             This site is the central hub for my technical projects, engineering notes, and explorations in operational practice. 
             It also serves as a public interface for my knowledge base and internal documentation.
           </p>
-          <br>
 
           <p>
           Here you’ll find technical articles, project write-ups, and practical insights into how 
@@ -126,13 +124,13 @@ import internalWiki from '../assets/internal_wiki.png';
     max-width: 820px;
   }
 
-  .eyebrow {
+  .hero .eyebrow {
     margin-block-end: 1rem;
-    font-size: 0.82rem;
+    font-size: 0.95rem; /* Increased from 0.82rem */
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    color: var(--text-muted);
+    color: var(--text-soft); /* Changed from var(--text-muted) */
   }
 
   .hero h1 {
@@ -145,21 +143,16 @@ import internalWiki from '../assets/internal_wiki.png';
     max-width: 10ch;
   }
 
-  .hero-lead {
-    margin-block-end: 1rem;
-    max-width: 38ch;
-    font-size: clamp(1.15rem, 2vw, 1.4rem);
-    line-height: 1.5;
-    color: var(--text-main);
-    font-weight: 500;
-  }
-
   .hero p {
     max-width: 62ch;
-    margin: 0;
+    margin-block-end: 1.25rem;
     font-size: 1.02rem;
     line-height: 1.8;
     color: var(--text-soft);
+  }
+
+  .hero p:last-child {
+    margin-block-end: 0;
   }
 
   .links-section {
@@ -256,7 +249,6 @@ import internalWiki from '../assets/internal_wiki.png';
     }
 
     .hero h1,
-    .hero-lead,
     .hero p {
       max-width: none;
     }
