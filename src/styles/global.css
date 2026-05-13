@@ -134,11 +134,18 @@ pre {
 	font-size: 0.92rem;
 	line-height: 1.4;
 	width: fit-content;
-	min-width: 200px; /* Optional: prevents extremely narrow blocks for tiny snippets */
-	margin-left: 1.5rem;
-	max-width: calc(100% - 1.5rem);
+	min-width: 200px;
+	margin-left: 0;
+	max-width: 100%;
 	overflow-x: auto;
 	box-sizing: border-box;
+}
+
+@media (min-width: 720px) {
+	pre {
+		margin-left: 3rem;
+		max-width: calc(100% - 3rem);
+	}
 }
 
 pre > code {
