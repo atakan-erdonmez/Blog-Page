@@ -2,7 +2,7 @@
 title: A Self-Hosted Blog with Automated Publishing and CI/CD
 description: Designing a static website with automated content publishing using Astro and Github Actions
 pubDate: 2026-05-10
-heroImage: ../Images/automated_blog_banner.png
+heroImage: ../Images/automated_blog_banner.webp
 ---
 For publishing my content, I needed a website. For this, I used an SSG (Static Site Generator) hosted on my personal VPS, with a fully automated pipeline for publishing content. 
 
@@ -167,7 +167,6 @@ jobs:
 The main security concern in this architecture is granting automated access from GitHub Actions to the production VPS. In this push model, the CI/CD pipeline holds an SSH private key that can write directly to the web server. If this credential were compromised, an attacker could modify the website contents.
 
 ### Trade-offs
-
 | Advantages                                 | Disadvantages                                                             |
 | ------------------------------------------ | ------------------------------------------------------------------------- |
 | Immediate deployment after every commit    | Requires storing an SSH private key in GitHub Secrets                     |
@@ -219,19 +218,19 @@ A second GitHub Actions workflow is triggered by changes to the public repositor
 The VPS serves the generated files from `/var/www/astro-blog` using Nginx. Since the site consists entirely of static HTML, CSS, and assets, no application runtime or database is required.
 
 ```
-Obsidian  
-↓  
-Private GitHub Repository  
-↓ (GitHub Action #1)  
-Public Website Repository  
-↓ (GitHub Action #2)  
-Astro Build  
-↓  
-VPS (/var/www/astro-blog)  
-↓  
-Nginx  
-↓  
-End Users
+	Obsidian  
+	↓  
+	Private GitHub Repository  
+	↓ (GitHub Action #1)  
+	Public Website Repository  
+	↓ (GitHub Action #2)  
+	Astro Build  
+	↓  
+	VPS (/var/www/astro-blog)  
+	↓  
+	Nginx  
+	↓  
+	End Users
 ```
 
 #### Architectural Features
