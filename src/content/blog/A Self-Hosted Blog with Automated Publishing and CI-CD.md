@@ -55,7 +55,6 @@ For uploading from public repo to the VPS, both push and pull models were evalua
 | **Complexity**  | Requires server-side cron/scripts | Clean server-side state            |
 | **Security**    | No external SSH access needed     | Requires SSH key in GitHub Secrets |
 | **Maintenance** | Higher (Server-side management)   | Lower (Centralized in CI/CD)       |
-
 Even though push model had more security risk, it was the superior choice with necessary risk mitigation. 
 
 ### Custom Location for Images
@@ -173,6 +172,7 @@ The main security concern in this architecture is granting automated access from
 | No cron jobs or pull scripts on the server | Implicit trust in GitHub’s secret storage and Action environment security |
 | Simpler server-side configuration          | Compromise of the CI environment could impact the VPS                     |
 | Clear deployment flow                      | Additional credential management is required                              |
+
 Although the push model introduces credential-management risk, it was selected because of its operational simplicity and near-instant publishing workflow.
 
 ### Risk Mitigation Measures
