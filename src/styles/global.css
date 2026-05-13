@@ -133,6 +133,8 @@ pre {
 	border-radius: 8px;
 	font-size: 0.92rem;
 	line-height: 1.4;
+	width: fit-content;
+	min-width: 200px; /* Optional: prevents extremely narrow blocks for tiny snippets */
 	max-width: 100%;
 	overflow-x: auto;
 	box-sizing: border-box;
