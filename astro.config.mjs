@@ -3,10 +3,12 @@
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig, fontProviders } from 'astro/config';
+import { remarkObsidian } from './src/plugins/remark-obsidian.mjs';
 
 
 export default defineConfig({
     markdown: {
+        remarkPlugins: [remarkObsidian],
     },
 
     site: 'https://example.com',
