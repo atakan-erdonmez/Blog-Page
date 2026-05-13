@@ -55,6 +55,7 @@ For uploading from public repo to the VPS, both push and pull models were evalua
 | **Complexity**  | Requires server-side cron/scripts | Clean server-side state            |
 | **Security**    | No external SSH access needed     | Requires SSH key in GitHub Secrets |
 | **Maintenance** | Higher (Server-side management)   | Lower (Centralized in CI/CD)       |
+
 Even though push model had more security risk, it was the superior choice with necessary risk mitigation. 
 
 ### Custom Location for Images
