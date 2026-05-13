@@ -84,8 +84,34 @@ textarea, input {
 	font-size: 16px;
 }
 
-table {
-	width: 100%;
+.prose table {
+	display: table
+	width: auto;
+	max-width: 100%;
+	border-collapse: collapse;
+	margin-block: 2rem;
+	border: 1px solid rgb(var(--gray-light));
+}
+
+.prose th,
+.prose td {
+	border: 1px solid rgb(var(--gray-light));
+	padding: 0.75rem;
+	text-align: left;
+}
+
+.prose td:empty, 
+.prose th:empty {
+    border: none;
+}
+
+.prose th {
+	background-color: rgba(var(--gray-light), 0.4);
+	font-weight: 700;
+}
+
+.prose tr:nth-child(even) {
+	background-color: rgba(var(--gray-light), 0.15);
 }
 
 img {

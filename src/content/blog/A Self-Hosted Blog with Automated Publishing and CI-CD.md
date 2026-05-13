@@ -55,6 +55,7 @@ For uploading from public repo to the VPS, both push and pull models were evalua
 | **Complexity**  | Requires server-side cron/scripts | Clean server-side state            |
 | **Security**    | No external SSH access needed     | Requires SSH key in GitHub Secrets |
 | **Maintenance** | Higher (Server-side management)   | Lower (Centralized in CI/CD)       |
+
 Even though push model had more security risk, it was the superior choice with necessary risk mitigation. 
 
 ### Custom Location for Images
@@ -166,6 +167,7 @@ jobs:
 The main security concern in this architecture is granting automated access from GitHub Actions to the production VPS. In this push model, the CI/CD pipeline holds an SSH private key that can write directly to the web server. If this credential were compromised, an attacker could modify the website contents.
 
 ### Trade-offs
+
 | Advantages                                 | Disadvantages                                                             |
 | ------------------------------------------ | ------------------------------------------------------------------------- |
 | Immediate deployment after every commit    | Requires storing an SSH private key in GitHub Secrets                     |

@@ -10,6 +10,11 @@ export default defineConfig({
     },
 
     site: 'https://example.com',
+    vite: {
+	    server: {
+		    allowedHosts: ['dev01-web.atakan-erdonmez.com'],
+	    },
+    },
     integrations: [mdx(), sitemap()],
     fonts: [
         {
