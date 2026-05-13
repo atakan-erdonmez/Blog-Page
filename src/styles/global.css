@@ -196,7 +196,7 @@ hr {
 
 /* Reduce space even more specifically when an HR follows an H2 */
 .prose h2 + hr {
-	margin-block-start: 0.5rem;
+	margin-block-start: 0.3rem;
 }
 
 .prose h3 {
