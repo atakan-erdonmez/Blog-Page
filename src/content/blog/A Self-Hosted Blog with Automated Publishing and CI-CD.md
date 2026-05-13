@@ -218,19 +218,19 @@ A second GitHub Actions workflow is triggered by changes to the public repositor
 The VPS serves the generated files from `/var/www/astro-blog` using Nginx. Since the site consists entirely of static HTML, CSS, and assets, no application runtime or database is required.
 
 ```
-	Obsidian  
-	↓  
-	Private GitHub Repository  
-	↓ (GitHub Action #1)  
-	Public Website Repository  
-	↓ (GitHub Action #2)  
-	Astro Build  
-	↓  
-	VPS (/var/www/astro-blog)  
-	↓  
-	Nginx  
-	↓  
-	End Users
+Obsidian  
+↓  
+Private GitHub Repository  
+↓ (GitHub Action #1)  
+Public Website Repository  
+↓ (GitHub Action #2)  
+Astro Build  
+↓  
+VPS (/var/www/astro-blog)  
+↓  
+Nginx  
+↓  
+End Users
 ```
 
 #### Architectural Features
