@@ -2,6 +2,9 @@
 
 This repository hosts the source code for my personal website and blog built with **Astro**. It serves as a platform for sharing technical articles, showcasing projects, and documenting professional insights.
 
+For the detailed post, check out my [blog](https://atakan-erdonmez.com/blog/a-self-hosted-blog-with-automated-publishing-and-ci-cd).
+
+
 ## Live Demo
 
 [atakanerdonmez.com](https://atakanerdonmez.com/)
@@ -14,6 +17,7 @@ This website is designed to be a fast, content-focused platform. It leverages As
 
 *   **Fast Loading Times:** Achieved through static site generation and optimized asset delivery.
 *   **Markdown-Powered Content:** Blog posts are written in Markdown for ease of use and maintainability.
+    **Automated Publishing Pipline:** Written content is automatically uploaded and published via pipeline using GitHub Actions.
 *   **Responsive Design:** Adapts seamlessly across various devices.
 *   **Technical Blog:** Sharing insights on software development, web technologies, and personal projects.
 
@@ -23,6 +27,7 @@ This website is designed to be a fast, content-focused platform. It leverages As
 *   **Language:** TypeScript
 *   **Styling:** Vanilla CSS
 *   **Content:** Markdown (`.md`) managed via Astro Content Collections
+*   **GitHub Actions:** Used for pipeline
 
 ## Getting Started (Local Development)
 

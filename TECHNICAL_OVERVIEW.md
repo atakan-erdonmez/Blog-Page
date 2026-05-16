@@ -11,6 +11,14 @@ Astro is a web framework optimized for content-driven websites. Its primary desi
 *   **Static Site Generation (SSG):** Astro pre-renders pages into static HTML, CSS, and JavaScript files during the build process. This approach ensures rapid loading times for end-users as pages are served fully formed.
 *   **Islands Architecture:** Astro components are treated as "islands" of interactivity. By default, these islands are rendered to static HTML, and JavaScript is only shipped to the client when explicitly enabled for a component. This selective hydration significantly reduces the amount of JavaScript the browser needs to download and execute, enhancing performance.
 
+### Automated Publishing Pipeling with GitHub Actions
+
+Blog posts are written locally on Obsidian, which is git controlled. With the CI/CD pipeline, content is automatically published to the website.
+
+1. **Push to Private Vault**: After writing the content, it is automatically committed and pushed to a private repo.
+2. **Copy to Blog-Page Repo**: A GitHub Action runs to copy the post into this repo.
+3. **Build and Deploy**: Another GitHub Action runs to build the static file from the markdown post, then uploads it to the VPS for publishing.
+
 ### Markdown to HTML Conversion
 
 Blog posts are authored in Markdown (`.md` files) and processed by Astro into HTML pages.
@@ -25,6 +33,8 @@ Blog posts are authored in Markdown (`.md` files) and processed by Astro into HT
 3.  **Content Schema (`src/content.config.ts`):** This file defines the structure and types for the frontmatter data using the Zod validation library. It ensures consistency and correctness across all blog posts by enforcing the expected fields and their data types. When Astro builds the site, it validates each content file against this schema.
 4.  **Layouts (`src/layouts/BlogPost.astro`):** A dedicated layout file structures the final blog post page. It includes common elements like headers and footers, and dynamically injects the content rendered from the Markdown file. It also handles features like automatic table of contents generation and image zooming.
 5.  **Dynamic Routing (`src/pages/blog/[...slug].astro`):** Astro's file-based routing system uses this file to generate individual pages for each blog post. The `[...slug].astro` pattern allows Astro to capture any URL segment following `/blog/` as a "slug" (derived from the Markdown filename) and use it to construct the page. During the build, Astro iterates through all valid Markdown files in `src/content/blog/` and creates a corresponding HTML page for each.
+
+
 
 ## Key Project Directories and Components
 
