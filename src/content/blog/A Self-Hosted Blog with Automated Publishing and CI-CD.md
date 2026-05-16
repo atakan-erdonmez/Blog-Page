@@ -122,7 +122,12 @@ jobs:
 ```
 
 ### Public Repo - VPS
-After there is a change in the main branch of the public repo, the second Action is run. The main purpose of this Action is pushing the new code to the VPS using SSH, then building with npm and putting into the correct directory. "easingthemes/ssh-deploy@main" is used for this.
+After there is a change in the main branch of the public repo, the second Action is run. The main purpose of this Action is building with npm, then pushing the static files to the VPS using SSH, and putting them into the correct directory. "easingthemes/ssh-deploy@main" is used for this.
+
+Building in Action and only pushing the static files to the VPS has numerous advantages:
+- No need for npm to be installed on the server, increasing security
+- Lower resource usage
+- Lower storage needs
 
 ```yaml
 name: Build and Deploy the Astro page
