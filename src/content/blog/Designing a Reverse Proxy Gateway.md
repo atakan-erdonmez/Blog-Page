@@ -155,7 +155,7 @@ The playbook is structured to separate initial setup from ongoing configuration 
 
 > The full configuration and playbooks are available in the repository:  
 
-> [App Proxy](https://github.com/atakan-erdonmez/homelab/tree/main/infrastructure/app_proxy) & [Management Proxy](https://github.com/atakan-erdonmez/homelab/tree/main/infrastructure/management_proxy)
+> [App Proxy](https://github.com/atakan-erdonmez/homelab/tree/main/infrastructure/app_proxy) & [Management Proxy](https://github.com/atakan-erdonmez/homelab/tree/main/infrastructure/mgmt_proxy)
 
 ## Final Architecture
 ---
