@@ -4,6 +4,11 @@ const today = new Date();
 
 <footer>
 	&copy; {today.getFullYear()} Atakan Erdonmez. All rights reserved.
+	<div class="social-links">
+		<a href="https://github.com/atakan-erdonmez/Blog-Page" target="_blank" rel="noopener">
+			View website source
+		</a>
+	</div>
 </footer>
 <style>
 	footer {
@@ -13,5 +18,23 @@ const today = new Date();
 		text-align: center;
 		box-shadow: none;
 		border-top: 1px solid rgba(var(--gray), 0.2);
+	}
+	.social-links {
+		display: flex;
+		justify-content: center;
+		gap: 1em;
+		margin-top: 1em;
+	}
+	.social-links a {
+		display: flex;
+		align-items: center;
+		gap: 0.5em;
+		text-decoration: none;
+		color: rgb(var(--gray));
+		font-size: 0.9em;
+		transition: color 0.2s ease;
+	}
+	.social-links a:hover {
+		color: var(--accent);
 	}
 </style>
