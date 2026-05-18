@@ -11,6 +11,10 @@ In my case, CGNAT on my home internet eliminates the possibility of port forward
 
 To address this, I designed and automated a gateway layer using Cloudflared and Nginx, managed using Ansible as Infrastructure as Code (IaC). This allows service exposure and routing to be defined declaratively, with consistent deployment, validation, and minimal manual intervention.
 
+> The full configuration and playbooks are available in the repository:  
+> [App Proxy](https://github.com/atakan-erdonmez/homelab/tree/main/infrastructure/app_proxy) & [Management Proxy](https://github.com/atakan-erdonmez/homelab/tree/main/infrastructure/mgmt_proxy)
+
+
 ![Architecture](../Images/reverse_proxy_diagram.svg)
 ## Problem
 ---
@@ -72,7 +76,7 @@ This is implemented using two separate environments:
 
 The control plane is protected using Cloudflare Access, with additional controls such as geo-based filtering and rate limiting.
 
-This separation reduces blast radius and prevents public traffic from impacting management access.
+This separation reduces blast radius and prevents public traffic from impacting management access. 
 
 ### Explicit Subdomain Mapping (No Wildcard)
 
@@ -132,7 +136,7 @@ Operational tasks are separated into distinct stages. In particular, Nginx insta
         daemon_reload: yes
 ```
 
-Task files can be seen in: [Github](https://github.com/atakan-erdonmez/homelab/tree/main/infrastructure/app_proxy/tasks)
+Task files can be seen in: [GitHub](https://github.com/atakan-erdonmez/homelab/tree/main/infrastructure/app_proxy/tasks)
 
 ## Implementation
 ---
@@ -153,10 +157,6 @@ When changes are made, only the relevant configurations are updated. Before relo
 
 The playbook is structured to separate initial setup from ongoing configuration changes. This allows updates to be applied without re-running unnecessary tasks.
 
-> The full configuration and playbooks are available in the repository:  
-
-> [App Proxy](https://github.com/atakan-erdonmez/homelab/tree/main/infrastructure/app_proxy) & [Management Proxy](https://github.com/atakan-erdonmez/homelab/tree/main/infrastructure/mgmt_proxy)
-
 ## Final Architecture
 ---
 
@@ -175,7 +175,7 @@ This creates a layered model where:
 ## Lessons Learned
 ---
 
-- Cloudflared networking behavior differs between Docker bridge and host mode, which can break localhost routing if not handled explicitly
+- Cloudflared's networking behavior differs between Docker bridge and host mode, which can break localhost routing if not handled explicitly
 - Separating tunnels across nodes simplified isolation but increased coordination complexity during initial setup
 ## Conclusion
 ---
