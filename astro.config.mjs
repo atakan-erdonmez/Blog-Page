@@ -3,12 +3,16 @@
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig, fontProviders } from 'astro/config';
+import rehypeExternalLinks from 'rehype-external-links';
 import { remarkObsidian } from './src/plugins/remark-obsidian.mjs';
 
 
 export default defineConfig({
     markdown: {
         remarkPlugins: [remarkObsidian],
+        rehypePlugins: [
+            [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }],
+        ],
     },
 
     site: 'https://example.com',
