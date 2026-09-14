@@ -64,7 +64,6 @@ For this, I needed to adjust `AllowedIPs` block and putting the subnets that I w
 
 While researching `AllowedIPs`, I learned that these entries also act as routing information. So when I put the subnets in the `AllowedIPs` block, WireGuard tool wg-quick created the necessary routes in the kernel automatically, simplifying the management.
 
-==I also enabled IP forwarding on the VPS.==
 
 > [DefGuard's AllowedIPs Explained](https://defguard.net/blog/allowedips-explained) was particularly helpful for understanding how WireGuard's `AllowedIPs` works.
 
@@ -197,27 +196,27 @@ The final architecture is relatively simple:
 
 
 ```text
-					Internet
-						 │
-						 │
-			┌──────▼──────┐
-			│     VPS     │
-			│             │
-			│ Shadowsocks │
-			│     │       │
-			│ WireGuard    │
-			└──────┬──────┘
-						 │
-						 │ Encrypted tunnel
-						 │
-			┌──────▼──────┐
-			│  MikroTik   │
-			│   Router    │
-			└──────┬──────┘
-						 │
-	 ┌─────────┼─────────┐
-	 │         │         │
- VLAN 10   VLAN 20   VLAN 30 ...
+				Internet
+					 │
+					 │
+		┌──────▼──────┐
+		│     VPS     │
+		│             │
+		│ Shadowsocks │
+		│     │       │
+		│ WireGuard    │
+		└──────┬──────┘
+					 │
+					 │ Encrypted tunnel
+					 │
+		┌──────▼──────┐
+		│  MikroTik   │
+		│   Router    │
+		└──────┬──────┘
+					 │
+ ┌─────────┼─────────┐
+ │         │         │
+VLAN 10   VLAN 20   VLAN 30 ...
 ```
 
 ## Conclusion
