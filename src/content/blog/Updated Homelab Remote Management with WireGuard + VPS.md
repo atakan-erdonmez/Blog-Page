@@ -196,26 +196,26 @@ The final architecture is relatively simple:
 
 
 ```text
-				Internet
-					 │
-					 │
-		┌──────▼──────┐
-		│     VPS     │
-		│             │
-		│ Shadowsocks │
-		│     │       │
-		│ WireGuard    │
-		└──────┬──────┘
-					 │
-					 │ Encrypted tunnel
-					 │
-		┌──────▼──────┐
-		│  MikroTik   │
-		│   Router    │
-		└──────┬──────┘
-					 │
- ┌─────────┼─────────┐
- │         │         │
+					Internet
+					│
+					│
+		 ┌──────▼──────┐
+		 │     VPS     │
+		 │             │
+		 │ Shadowsocks │
+		 │     │       │
+	 	 │ WireGuard   │
+		 └──────┬──────┘
+						│
+						│ Encrypted tunnel
+				 		│
+		 ┌──────▼──────┐
+		 │  MikroTik   │
+		 │   Router    │
+		 └──────┬──────┘
+						│
+	┌─────────┼─────────┐
+	│         │         │
 VLAN 10   VLAN 20   VLAN 30 ...
 ```
 
