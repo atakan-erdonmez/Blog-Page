@@ -195,10 +195,10 @@ The final architecture is relatively simple:
 
 
 
-```text
-					Internet
-					│
-					│
+```
+						Internet
+						│
+						│
 		 ┌──────▼──────┐
 		 │     VPS     │
 		 │             │
